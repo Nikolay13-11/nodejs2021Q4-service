@@ -51,8 +51,9 @@
     "fastify": "^3.24.1",
     "koa": "^2.13.4",
     "koa-bodyparser": "^4.3.0",
+    "koa-json": "^2.0.2",
     "swagger-ui-express": "4.1.6",
-    "uuid": "8.3.2",
+    "uuid": "^8.3.2",
     "yamljs": "0.3.0"
   },
   "devDependencies": {
