@@ -1,11 +1,38 @@
-const router = require('express').Router();
-const User = require('./user.model');
-const usersService = require('./user.service');
+const Router = require('@koa/router');
 
-router.route('/').get(async (req, res) => {
-  const users = await usersService.getAll();
-  // map user fields to exclude secret fields like "password"
-  res.json(users.map(User.toResponse));
-});
+const { getAll, getById, createUser, updateUser, deleteUser } = require('./user.service')
 
-module.exports = router;
+const router = new Router()
+
+router.get('/users', async (ctx) => {
+    ctx.body = await getAll()
+})
+
+router.get('/users/:id', async (ctx) => {
+  const {id} = ctx.params
+  const user = await getById(id)
+    ctx.body = user
+})
+
+router.post('/users', async (ctx) => {
+  const inputUser = ctx.request.body
+  const user = await createUser(inputUser)
+  const { id, name, login } = user
+  ctx.body = { id, name, login}
+})
+
+router.put('/users/:id', async (ctx) => {
+  const {id} = ctx.params
+  const inputUser = ctx.request.body
+  const user = await updateUser(id, inputUser)
+  
+  ctx.body = user
+})
+
+router.delete('/users/:id', async (ctx) => {
+  const {id} = ctx.params
+  deleteUser(id)
+  ctx.body = `user ${id} deleted`
+})
+
+module.exports = router
