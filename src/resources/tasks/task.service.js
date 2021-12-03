@@ -30,7 +30,7 @@ const updateTask = async( taskId, task) => {
         title: task.title || old.title,
         order: task.order || old.order,
         description: task.description || old.description,
-        userId: old.userId,
+        userId: task.userId,
         boardId: task.boardId || old.boardId,
         columnId: task.columnId || old.columnId
     }
