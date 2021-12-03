@@ -17,16 +17,4 @@ class Board {
   }
 }
 
-// function Board(t, c) {
-//   const board = {
-//     id: uuidv4(),
-//     title: t,
-//     columns: []
-//   }
-//   c.forEach(el => {
-//     board.columns.push(el)
-//   });
-//   return board
-// }
-
 module.exports = Board;

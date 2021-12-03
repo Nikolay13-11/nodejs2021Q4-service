@@ -38,7 +38,6 @@ const updateTask = async( taskId, task) => {
     return updTask
 }
 
-// eslint-disable-next-line no-return-await
 const deleteTask = async (boardId, taskId) => {
     const delTask = await taskRepo.removeTask(boardId, taskId);
     return delTask;

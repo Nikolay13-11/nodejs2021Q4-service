@@ -5,8 +5,8 @@ let tasks = []
 const getAllTasks = () => tasks;
 
 const getTask = (taskId) => {
-  console.log(tasks)
-  return tasks.find(task => task.id === taskId);
+  const allTasks = tasks.find(task => task.id === taskId);
+  return allTasks;
 }
 
 const getAllOnBoardById = (boardId) => tasks.filter(task => task.boardId === boardId);
