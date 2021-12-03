@@ -1,4 +1,5 @@
 const boardsRepo = require('./boards.memory.repository');
+const { getAllTasks, deleteTask } = require('../tasks/task.service')
 
 // eslint-disable-next-line no-return-await
 const getAll = async () => await boardsRepo.getAll();
@@ -10,13 +11,21 @@ const updateBoard = async(id, board) => {
     const old = await getById(id)
     const update = {
         title: board.title || old.title,
-        colums: board.colums || old.colums,
+        columns: board.columns || old.columns,
     }
     // eslint-disable-next-line no-return-await
     return await boardsRepo.updateBoard(id, update)
 }
 
 // eslint-disable-next-line no-return-await
-const deleteBoard = async (id) => await boardsRepo.removeBoard(id);
+const deleteBoard = async (id) => {
+    const tasks = await getAllTasks()
+    tasks.forEach(task => {
+        if(task.boardId === id) {
+            deleteTask(id, task.id)
+        }
+    })
+    await boardsRepo.removeBoard(id);
+}
 
 module.exports = { getAll, getById, createBoard, deleteBoard, updateBoard };

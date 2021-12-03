@@ -1,6 +1,6 @@
 const Router = require('@koa/router');
 
-const { getAll, getById, createTask, updateTask, deleteTask } = require('./task.service')
+const { getAll, getById, getTask, createTask, updateTask, deleteTask } = require('./task.service')
 
 const router = new Router()
 
@@ -10,8 +10,8 @@ router.get('/boards/:boardId/tasks', async (ctx) => {
 })
 
 router.get('/boards/:boardId/tasks/:taskId', async (ctx) => {
-  const { boardId, taskId} = ctx.params
-  const task = await getById(boardId, taskId)
+  const { taskId } = ctx.params
+  const task = await getTask(taskId)
     if(!task) {
       ctx.status = 404
     } else
@@ -45,11 +45,11 @@ router.post('/boards/:Id/tasks', async (ctx) => {
 })
 
 router.put('/boards/:boardId/tasks/:taskId', async (ctx) => {
-  const { boardId, taskId } = ctx.params
+  const { taskId } = ctx.params
   const inputTask = ctx.request.body
-  const task = await updateTask(boardId, taskId, inputTask)
-  ctx.status = 200
+  const task = await updateTask( taskId, inputTask)
   ctx.body = task
+  ctx.status = 200
 })
 
 router.delete('/boards/:boardId/tasks/:taskId', async (ctx) => {

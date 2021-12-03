@@ -1,26 +1,47 @@
 const taskRepo = require('./task.memory.repository');
 
-// eslint-disable-next-line no-return-await
-const getAll = async (boardId) => await taskRepo.getAllOnBoardById(boardId);
-// eslint-disable-next-line no-return-await
-const getById = async (boardId, taskId) => await taskRepo.getTaskById(boardId, taskId);
-// eslint-disable-next-line no-return-await
-const createTask = async (obj) => await taskRepo.createNewTask(obj);
-const updateTask = async(boardId, taskId, task) => {
-    const old = await getById(boardId, taskId)
+const getAllTasks = async () => {
+    const allTsks = await taskRepo.getAllTasks();
+    return allTsks
+} 
+
+const getTask = async (id) => {
+    const tasks = await taskRepo.getTask(id)
+    return tasks
+}
+
+const getAll = async (boardId) => {
+    const allTasks = await taskRepo.getAllOnBoardById(boardId);
+    return allTasks
+} 
+
+const getById = async (boardId, taskId) => {
+    const taskById =  await taskRepo.getTaskById(boardId, taskId);
+    return taskById
+}
+
+const createTask = async (obj) => {
+    const newTask = await taskRepo.createNewTask(obj);
+    return newTask;
+}
+const updateTask = async( taskId, task) => {
+    const old = await getTask(taskId)
     const update = {
         title: task.title || old.title,
         order: task.order || old.order,
         description: task.description || old.description,
-        userId: task.userId || old.userId,
+        userId: old.userId,
         boardId: task.boardId || old.boardId,
         columnId: task.columnId || old.columnId
     }
-    // eslint-disable-next-line no-return-await
-    return await taskRepo.updateTask(boardId, taskId, update)
+    const updTask = await taskRepo.updateTask(taskId, update)
+    return updTask
 }
 
 // eslint-disable-next-line no-return-await
-const deleteTask = async (boardId, taskId) => await taskRepo.removeTask(boardId, taskId);
+const deleteTask = async (boardId, taskId) => {
+    const delTask = await taskRepo.removeTask(boardId, taskId);
+    return delTask;
+} 
 
-module.exports = { getAll, getById, createTask, deleteTask, updateTask };
+module.exports = { getAll, getById, createTask, deleteTask, updateTask, getAllTasks, getTask };
