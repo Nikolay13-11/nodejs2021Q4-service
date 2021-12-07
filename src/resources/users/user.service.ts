@@ -1,4 +1,4 @@
-const { getAllTasks, updateTask } = require('../tasks/task.service')
+import { getAllTasksService, updateTaskService } from '../tasks/task.service'
 import { IUser, IUserWoId } from "./models/user.model";
 import { ITask } from "../tasks/models/task.model";
 import {
@@ -36,10 +36,10 @@ export const updateUserService = async(id:string, user:IUserWoId):Promise<IUser>
 }
 
 export const deleteUserService = async (id:string):Promise<void> => {
-  const tasks = await getAllTasks()
+  const tasks = await getAllTasksService()
   tasks.forEach((task: ITask) => {
     if(task.userId === id) {
-      updateTask(task.id, {
+      updateTaskService(task.id, {
         "userId": null
       })
     }
