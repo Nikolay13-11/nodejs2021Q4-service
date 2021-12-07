@@ -1,4 +1,4 @@
-import { ITask, ITaskWoId } from './models/task.model';
+import { ITask, ITaskWoId, ITaskUserId } from './models/task.model';
 import {
     getAllTasks,
     getTask,
@@ -9,7 +9,7 @@ import {
     removeTask
 } from './task.memory.repository'
 
-export const getAllTasksService = async ():Promise<ITask[] | undefined> => {
+export const getAllTasksService = async ():Promise<ITask[] | []> => {
     const allTsks = await getAllTasks();
     return allTsks
 } 
@@ -33,13 +33,13 @@ export const createTaskService = async (obj: ITask):Promise<ITask> => {
     const newTask = await createNewTask(obj);
     return newTask;
 }
-export const updateTaskService = async( taskId: string, task: ITaskWoId):Promise<ITask> => {
+export const updateTaskService = async( taskId: string, task: any):Promise<ITask> => {
     const old:any = await getTaskService(taskId)
     const update = {
         title: task.title || old.title,
         order: task.order || old.order,
         description: task.description || old.description,
-        userId: task.userId,
+        userId: task.userId || null,
         boardId: task.boardId || old.boardId,
         columnId: task.columnId || old.columnId
     }
