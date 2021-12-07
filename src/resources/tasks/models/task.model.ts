@@ -15,3 +15,7 @@ export interface ITaskWoId {
     boardId: string;
     columnId: string;
 }
+export interface ITaskUserId {
+    userId: string | null;
+}
+

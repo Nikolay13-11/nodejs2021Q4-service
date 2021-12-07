@@ -1,4 +1,4 @@
-import { ITask, ITaskWoId, ITaskUserId } from './models/task.model';
+import { ITask } from './models/task.model';
 import {
     getAllTasks,
     getTask,

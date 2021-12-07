@@ -1,5 +1,5 @@
-const Router = require('@koa/router');
-
+import { Context } from 'koa'
+import Router from '@koa/router'
 import {
   getAllService,
   getByIdService,
@@ -11,12 +11,12 @@ import {
 
 export const routerTask = new Router()
 
-routerTask.get('/boards/:boardId/tasks', async (ctx: any):Promise<void> => {
+routerTask.get('/boards/:boardId/tasks', async (ctx: Context):Promise<void> => {
   const {boardId} = ctx.params
     ctx.body = await getAllService(boardId)
 })
 
-routerTask.get('/boards/:boardId/tasks/:taskId', async (ctx: any):Promise<void> => {
+routerTask.get('/boards/:boardId/tasks/:taskId', async (ctx: Context):Promise<void> => {
   const { taskId } = ctx.params
   const task = await getTaskService(taskId)
     if(!task) {
@@ -59,7 +59,7 @@ routerTask.put('/boards/:boardId/tasks/:taskId', async (ctx: any):Promise<void> 
   ctx.status = 200
 })
 
-routerTask.delete('/boards/:boardId/tasks/:taskId', async (ctx: any):Promise<void> => {
+routerTask.delete('/boards/:boardId/tasks/:taskId', async (ctx: Context):Promise<void> => {
   const { boardId, taskId } = ctx.params
   const task = await getByIdService(boardId, taskId)
   if(!task) {

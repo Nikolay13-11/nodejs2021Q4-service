@@ -1,9 +1,10 @@
-const Task = require('./task.model')
 import { ITask, ITaskWoId } from './models/task.model'
+
+import { Task } from './task.model'
 
 let tasks: ITask[] = []
 
-export const getAllTasks = (): ITask[] | undefined => tasks;
+export const getAllTasks = (): ITask[] | [] => tasks;
 
 export const getTask = (taskId: string):ITask | undefined => {
   const allTasks = tasks.find(task => task.id === taskId);
@@ -14,8 +15,8 @@ export const getAllOnBoardById = (boardId: string) => tasks.filter(task => task.
 
 export const getTaskById = (boardId: string, taskId: string): ITask | undefined => tasks.find(task => task.boardId === boardId && task.id === taskId)
 
-export const createNewTask = (obj: ITask): ITask => {
-  const newTask = new Task(obj)
+export const createNewTask = (obj: any): ITask => {
+  const newTask: any = new Task(obj)
   tasks.push(newTask)
   return newTask
 }

@@ -13,7 +13,7 @@ export const createNewBoard = (obj: any): IBoard => {
   return newBoard
 }
 
-export const updateBoard = (id: string, board: IBoardWoId) => {
+export const updateBoard = (id: string, board: any) => {
   const index = boards.findIndex((i) => i.id === id)
   boards[index] = {
     id,

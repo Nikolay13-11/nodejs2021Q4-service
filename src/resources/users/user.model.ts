@@ -1,11 +1,16 @@
-const { v4: uuidv4 } =  require('uuid')
+import { v4 as uuidv4 } from 'uuid';
 import { IUser, IUserWoPassword } from "./models/user.model";
+
 
 export class User {
     id: string;
+
     name: string;
+
     login: string;
+
     password: string;
+
   constructor({
     id = uuidv4(),
     name = 'USER',

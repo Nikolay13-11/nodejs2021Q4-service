@@ -1,15 +1,21 @@
+import { v4 as uuidv4 } from 'uuid';
 import { ITask } from "./models/task.model";
 
-const { v4: uuidv4 } =  require('uuid')
-
-class Task {
+export class Task {
   id: string;
+
   title: string;
+
   order: string;
+
   description: string;
+
   userId: string | null;
+
   boardId: string | null;
+
   columnId: string | null;
+
   constructor({
     id = uuidv4(),
     title = 'Title',
@@ -49,5 +55,3 @@ class Task {
     };
   }
 }
-
-module.exports = Task;

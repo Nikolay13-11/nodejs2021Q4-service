@@ -18,7 +18,7 @@ export const getByIdService = async (id:string):Promise<IBoard | undefined> => {
     return board;
 }
 
-export const createBoardService = async (obj: IBoard):Promise<IBoard> => {
+export const createBoardService = async (obj: IBoardWoId):Promise<IBoard> => {
     const newBoard = await createNewBoard(obj);
     return newBoard;
 }

@@ -1,5 +1,5 @@
-const Router = require('@koa/router');
-
+import { Context } from 'koa'
+import Router from '@koa/router'
 import { 
   getAllService,
   getByIdService,
@@ -8,13 +8,14 @@ import {
   deleteUserService
 } from "./user.service";
 
+
 export const routerUser = new Router()
 
-routerUser.get('/users', async (ctx: any):Promise<void> => {
+routerUser.get('/users', async (ctx: Context):Promise<void> => {
     ctx.body = await getAllService()
 })
 
-routerUser.get('/users/:id', async (ctx: any):Promise<void> => {
+routerUser.get('/users/:id', async (ctx: Context):Promise<void> => {
   const {id} = ctx.params
   const user = await getByIdService(id)
   if(!user) {
@@ -39,7 +40,7 @@ routerUser.put('/users/:id', async (ctx: any):Promise<void> => {
   ctx.body = user
 })
 
-routerUser.delete('/users/:id', async (ctx: any):Promise<void> => {
+routerUser.delete('/users/:id', async (ctx: Context):Promise<void> => {
   const {id} = ctx.params
   const user = await getByIdService(id)
   if(!user) {

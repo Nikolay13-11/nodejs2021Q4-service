@@ -1,4 +1,5 @@
-const Router = require('@koa/router');
+import { Context } from 'koa'
+import Router from '@koa/router'
 import {
   getAllService,
   getByIdService,
@@ -10,11 +11,11 @@ from './boards.service'
 
 export const boardRouter = new Router()
 
-boardRouter.get('/boards', async (ctx: any):Promise<void> => {
+boardRouter.get('/boards', async (ctx: Context):Promise<void> => {
     ctx.body = await getAllService()
 })
 
-boardRouter.get('/boards/:id', async (ctx: any):Promise<void> => {
+boardRouter.get('/boards/:id', async (ctx: Context):Promise<void> => {
   const {id} = ctx.params
   const board = await getByIdService(id)
   if(!board) {
@@ -39,7 +40,7 @@ boardRouter.put('/boards/:id', async (ctx: any):Promise<void> => {
   ctx.body = board
 })
 
-boardRouter.delete('/boards/:id', async (ctx: any):Promise<void> => {
+boardRouter.delete('/boards/:id', async (ctx: Context):Promise<void> => {
   const {id} = ctx.params
   const board = await getByIdService(id)
   if(!board) {

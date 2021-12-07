@@ -1,16 +1,19 @@
-const { v4: uuidv4 } =  require('uuid')
+import { v4 as uuidv4 } from 'uuid'
 import { IBoard, IColumns } from './models/board.model'
+
 
 export class Board {
   id: string
+
   title: string
-  columns: null
+
+  columns: IColumns[]
+
   constructor({
-    id = uuidv4(),
-    title = '',
-    columns = null,
+    title = 'Title',
+    columns = [],
   } = {}) {
-    this.id = id;
+    this.id = uuidv4();
     this.title = title;
     this.columns = columns;
   }
