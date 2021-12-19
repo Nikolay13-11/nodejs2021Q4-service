@@ -24,7 +24,7 @@ boardRouter.get('/boards/:id', async (ctx: Context):Promise<void> => {
     ctx.body = board
 })
 
-boardRouter.post('/boards', async (ctx: any):Promise<void> => {
+boardRouter.post('/boards', async (ctx: Context):Promise<void> => {
   const inputBoard = ctx.request.body
   const board = await createBoardService(inputBoard)
   const { id, title, columns } = board
@@ -32,7 +32,7 @@ boardRouter.post('/boards', async (ctx: any):Promise<void> => {
   ctx.status = 201
 })
 
-boardRouter.put('/boards/:id', async (ctx: any):Promise<void> => {
+boardRouter.put('/boards/:id', async (ctx: Context):Promise<void> => {
   const {id} = ctx.params
   const inputBoard = ctx.request.body
   const board = await updateBoardService(id, inputBoard)

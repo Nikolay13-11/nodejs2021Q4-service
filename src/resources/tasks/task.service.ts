@@ -1,4 +1,4 @@
-import { ITask } from './models/task.model';
+import { ITask, ITaskWoId } from './models/task.model';
 import {
     getAllTasks,
     getTask,
@@ -29,19 +29,20 @@ export const getByIdService = async (boardId:string, taskId:string):Promise<ITas
     return taskById
 }
 
-export const createTaskService = async (obj: ITask):Promise<ITask> => {
+export const createTaskService = async (obj: ITaskWoId):Promise<ITask> => {
     const newTask = await createNewTask(obj);
     return newTask;
 }
 export const updateTaskService = async( taskId: string, task: any):Promise<ITask> => {
-    const old:any = await getTaskService(taskId)
-    const update = {
+    const old: ITask | undefined = await getTaskService(taskId)
+    if( old === undefined) throw new Error("Board not found");
+    const update:ITaskWoId = {
         title: task.title || old.title,
         order: task.order || old.order,
         description: task.description || old.description,
-        userId: task.userId || null,
+        userId: task.userId,
         boardId: task.boardId || old.boardId,
-        columnId: task.columnId || old.columnId
+        columnId: task.columnId || old.columnId,
     }
     const updTask = await updateTask(taskId, update)
     return updTask

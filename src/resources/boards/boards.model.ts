@@ -11,7 +11,11 @@ export class Board {
 
   constructor({
     title = 'Title',
-    columns = [],
+    columns = [{
+      id: '1',
+      title: 'title',
+      order: '1'
+    }],
   } = {}) {
     this.id = uuidv4();
     this.title = title;

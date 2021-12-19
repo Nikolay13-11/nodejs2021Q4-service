@@ -1,4 +1,4 @@
-import { ITask, ITaskWoId } from './models/task.model'
+import { ITask, ITaskWoId, ITest } from './models/task.model'
 
 import { Task } from './task.model'
 
@@ -15,8 +15,8 @@ export const getAllOnBoardById = (boardId: string) => tasks.filter(task => task.
 
 export const getTaskById = (boardId: string, taskId: string): ITask | undefined => tasks.find(task => task.boardId === boardId && task.id === taskId)
 
-export const createNewTask = (obj: any): ITask => {
-  const newTask: any = new Task(obj)
+export const createNewTask = (obj: ITest): ITask => {
+  const newTask: Task = new Task(obj)
   tasks.push(newTask)
   return newTask
 }

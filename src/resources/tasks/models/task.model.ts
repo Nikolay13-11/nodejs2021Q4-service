@@ -1,7 +1,7 @@
 export interface ITask {
     id: string;
     title: string;
-    order: string;
+    order: number;
     description: string;
     userId: string | null;
     boardId: string;
@@ -9,7 +9,7 @@ export interface ITask {
 }
 export interface ITaskWoId {
     title: string;
-    order: string;
+    order: number;
     description: string;
     userId: string | null;
     boardId: string;
@@ -17,5 +17,11 @@ export interface ITaskWoId {
 }
 export interface ITaskUserId {
     userId: string | null;
+}
+
+export interface ITest {
+    title: string,
+    order: number,
+    description: string
 }
 

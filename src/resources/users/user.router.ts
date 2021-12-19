@@ -8,7 +8,6 @@ import {
   deleteUserService
 } from "./user.service";
 
-
 export const routerUser = new Router()
 
 routerUser.get('/users', async (ctx: Context):Promise<void> => {
@@ -24,7 +23,7 @@ routerUser.get('/users/:id', async (ctx: Context):Promise<void> => {
     ctx.body = user
 })
 
-routerUser.post('/users', async (ctx: any):Promise<void> => {
+routerUser.post('/users', async (ctx: Context):Promise<void> => {
   const inputUser = ctx.request.body
   const user = await createUserService(inputUser)
   const { id, name, login } = user
@@ -32,7 +31,7 @@ routerUser.post('/users', async (ctx: any):Promise<void> => {
   ctx.status = 201
 })
 
-routerUser.put('/users/:id', async (ctx: any):Promise<void> => {
+routerUser.put('/users/:id', async (ctx: Context):Promise<void> => {
   const {id} = ctx.params
   const inputUser = ctx.request.body
   const user = await updateUserService(id, inputUser)

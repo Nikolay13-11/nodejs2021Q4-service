@@ -6,24 +6,24 @@ export class Task {
 
   title: string;
 
-  order: string;
+  order: number;
 
   description: string;
 
   userId: string | null;
 
-  boardId: string | null;
+  boardId: string;
 
-  columnId: string | null;
-
+  columnId: string;
+ 
   constructor({
     id = uuidv4(),
     title = 'Title',
-    order = 'Oreder',
+    order = 1,
     description = '',
     userId = null,
-    boardId = null,
-    columnId = null
+    boardId = '',
+    columnId = ''
   } = {}) {
     this.id = id;
     this.title = title;
@@ -34,7 +34,7 @@ export class Task {
     this.columnId = columnId;
   }
 
-  static toResponse(task: ITask): ITask {
+  static toResponse(task: ITask) {
     const {
       id,
       title,

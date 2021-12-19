@@ -25,7 +25,7 @@ routerTask.get('/boards/:boardId/tasks/:taskId', async (ctx: Context):Promise<vo
     ctx.body = task
 })
 
-routerTask.post('/boards/:Id/tasks', async (ctx: any):Promise<void> => {
+routerTask.post('/boards/:Id/tasks', async (ctx: Context):Promise<void> => {
   const {Id} = ctx.params
   const inputTask = ctx.request.body
   inputTask.boardId = Id
@@ -51,7 +51,7 @@ routerTask.post('/boards/:Id/tasks', async (ctx: any):Promise<void> => {
   ctx.status = 201
 })
 
-routerTask.put('/boards/:boardId/tasks/:taskId', async (ctx: any):Promise<void> => {
+routerTask.put('/boards/:boardId/tasks/:taskId', async (ctx: Context):Promise<void> => {
   const { taskId } = ctx.params
   const inputTask = ctx.request.body
   const task = await updateTaskService( taskId, inputTask)

@@ -23,10 +23,14 @@ export const createBoardService = async (obj: IBoardWoId):Promise<IBoard> => {
     return newBoard;
 }
 export const updateBoardService = async(id:string, board: IBoardWoId):Promise<IBoard> => {
-    const old:any = await getByIdService(id)
-    const update = {
-        title: board.title || old.title,
-        columns: board.columns || old.columns,
+    const old:IBoardWoId | undefined = await getByIdService(id)
+    const update: IBoardWoId = {
+        title: '',
+        columns: []
+    }
+    if(old) {
+        update.title = board.title || old.title;
+        update.columns = board.columns || old.columns;
     }
     const updBoard = await updateBoard(id, update)
     return updBoard;

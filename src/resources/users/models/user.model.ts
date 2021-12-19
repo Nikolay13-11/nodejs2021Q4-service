@@ -16,15 +16,3 @@ export interface IUserWoId {
     login: string;
     password: string;
 }
-
-//   interface IRequest {
-//     method: string;
-//     url: string;
-//     header: object;
-//   }
-//   interface IResponse {
-//     status: number;
-//     message: string;
-//     header: object;
-//   }
- 
