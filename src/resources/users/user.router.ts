@@ -1,4 +1,4 @@
-import { Context } from 'koa'
+import { Context, Next } from 'koa'
 import Router from '@koa/router'
 import { 
   getAllService,
@@ -7,11 +7,16 @@ import {
   updateUserService,
   deleteUserService
 } from "./user.service";
+// import { logger } from '../../logging/logging';
+// import { test } from '../../logging/error.log';
+
 
 export const routerUser = new Router()
 
 routerUser.get('/users', async (ctx: Context):Promise<void> => {
     ctx.body = await getAllService()
+    // Promise.reject(Error('Oops!'));
+  // throw Error('Oops!');
 })
 
 routerUser.get('/users/:id', async (ctx: Context):Promise<void> => {
