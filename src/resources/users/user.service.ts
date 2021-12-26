@@ -10,7 +10,6 @@ import {
   updateUser,
   removeUser
 } from "./user.memory.repository";
-import { CustomError } from '../../logging/error.log';
 
 
 export const getAllService = async ():Promise<IUser[]> => {
@@ -20,12 +19,7 @@ export const getAllService = async ():Promise<IUser[]> => {
 
 export const getByIdService = async (id:string):Promise<IUser | undefined> => {
   const user = await getUserById(id);
-  if(user === undefined) {
-    throw new CustomError(
-      StatusCodes.NOT_FOUND,
-      `User not found`
-    );
-  }
+
   return user;
 }
 
@@ -36,9 +30,8 @@ export const createUserService = async (obj: IUser):Promise<IUser> => {
 export const updateUserService = async(id:string, user:IUserWoId):Promise<IUser> => {
     const old:IUserWoId | undefined = await getByIdService(id)
     if(old === undefined) {
-      throw new CustomError(
-        StatusCodes.NOT_FOUND,
-        `User not found`
+      throw new Error(
+        'not found'
       );
     }
     const update:IUserWoId = {

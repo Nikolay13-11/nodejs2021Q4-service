@@ -1,0 +1,67 @@
+method:POST url:/boards query:{} body:{"title":"Autotest board","columns":[{"title":"Backlog","order":1},{"title":"Sprint","order":2}]} status:201
+method:GET url:/boards query:{} body:{} status:200
+method:GET url:/boards query:{} body:{} status:200
+method:GET url:/boards/da23af1d-e552-4c20-8afc-838392bc3192 query:{} body:{} status:200
+method:POST url:/boards query:{} body:{"title":"Autotest board","columns":[{"title":"Backlog","order":1},{"title":"Sprint","order":2}]} status:201
+method:DELETE url:/boards/d4aec427-dd6c-40a4-8f53-66aa891bdcbb query:{} body:{} status:204
+method:POST url:/boards query:{} body:{"title":"Autotest board","columns":[{"title":"Backlog","order":1},{"title":"Sprint","order":2}]} status:201
+method:PUT url:/boards/24967f9b-cbfc-4f16-922b-d51c2c85e789 query:{} body:{"id":"24967f9b-cbfc-4f16-922b-d51c2c85e789","title":"Autotest updated board","columns":[{"title":"Backlog","order":1},{"title":"Sprint","order":2}]} status:200
+method:GET url:/boards/24967f9b-cbfc-4f16-922b-d51c2c85e789 query:{} body:{} status:200
+method:DELETE url:/boards/24967f9b-cbfc-4f16-922b-d51c2c85e789 query:{} body:{} status:204
+method:POST url:/boards query:{} body:{"title":"Autotest board","columns":[{"title":"Backlog","order":1},{"title":"Sprint","order":2}]} status:201
+method:DELETE url:/boards/5c7446a7-0b10-4ec4-bd64-73417bb016fa query:{} body:{} status:204
+method:GET url:/boards/5c7446a7-0b10-4ec4-bd64-73417bb016fa query:{} body:{} status:404
+method:POST url:/boards query:{} body:{"title":"Autotest board","columns":[{"title":"Backlog","order":1},{"title":"Sprint","order":2}]} status:201
+method:POST url:/boards/973ed89a-d0d4-486c-b4e3-9264293656bf/tasks query:{} body:{"title":"Task #1","order":1,"description":"Lorem ipsum","boardId":"973ed89a-d0d4-486c-b4e3-9264293656bf","userId":null,"columnId":null} status:201
+method:POST url:/boards/973ed89a-d0d4-486c-b4e3-9264293656bf/tasks query:{} body:{"title":"Task #2","order":2,"description":"Lorem ipsum","boardId":"973ed89a-d0d4-486c-b4e3-9264293656bf","userId":null,"columnId":null} status:201
+method:POST url:/boards/973ed89a-d0d4-486c-b4e3-9264293656bf/tasks query:{} body:{"title":"Task #3","order":3,"description":"Lorem ipsum","boardId":"973ed89a-d0d4-486c-b4e3-9264293656bf","userId":null,"columnId":null} status:201
+method:POST url:/boards/973ed89a-d0d4-486c-b4e3-9264293656bf/tasks query:{} body:{"title":"Task #4","order":4,"description":"Lorem ipsum","boardId":"973ed89a-d0d4-486c-b4e3-9264293656bf","userId":null,"columnId":null} status:201
+method:POST url:/boards/973ed89a-d0d4-486c-b4e3-9264293656bf/tasks query:{} body:{"title":"Task #5","order":5,"description":"Lorem ipsum","boardId":"973ed89a-d0d4-486c-b4e3-9264293656bf","userId":null,"columnId":null} status:201
+method:GET url:/boards/973ed89a-d0d4-486c-b4e3-9264293656bf/tasks/0a8d2d2f-503f-438d-8a78-ed8e1a50a902 query:{} body:{} status:200
+method:GET url:/boards/973ed89a-d0d4-486c-b4e3-9264293656bf/tasks/54896a9f-516b-492a-8cec-5417f09d628d query:{} body:{} status:200
+method:GET url:/boards/973ed89a-d0d4-486c-b4e3-9264293656bf/tasks/b3437651-c8e2-485d-9da2-ad8f36b2555f query:{} body:{} status:200
+method:GET url:/boards/973ed89a-d0d4-486c-b4e3-9264293656bf/tasks/42c8a50e-72cf-425a-9576-00f54e1564b5 query:{} body:{} status:200
+method:GET url:/boards/973ed89a-d0d4-486c-b4e3-9264293656bf/tasks/6e69782a-5e97-48be-9696-a8326e93e021 query:{} body:{} status:200
+method:DELETE url:/boards/973ed89a-d0d4-486c-b4e3-9264293656bf query:{} body:{} status:204
+method:GET url:/boards/973ed89a-d0d4-486c-b4e3-9264293656bf/tasks/0a8d2d2f-503f-438d-8a78-ed8e1a50a902 query:{} body:{} status:404
+method:GET url:/boards/973ed89a-d0d4-486c-b4e3-9264293656bf/tasks/54896a9f-516b-492a-8cec-5417f09d628d query:{} body:{} status:404
+method:GET url:/boards/973ed89a-d0d4-486c-b4e3-9264293656bf/tasks/b3437651-c8e2-485d-9da2-ad8f36b2555f query:{} body:{} status:404
+method:GET url:/boards/973ed89a-d0d4-486c-b4e3-9264293656bf/tasks/42c8a50e-72cf-425a-9576-00f54e1564b5 query:{} body:{} status:404
+method:GET url:/boards/973ed89a-d0d4-486c-b4e3-9264293656bf/tasks/6e69782a-5e97-48be-9696-a8326e93e021 query:{} body:{} status:404
+method:DELETE url:/boards/da23af1d-e552-4c20-8afc-838392bc3192 query:{} body:{} status:204
+method:GET url:/users query:{} body:{} status:200
+method:POST url:/users query:{} body:{"name":"TEST_USER","login":"test_user","password":"T35t_P@55w0rd"} status:201
+method:GET url:/users/41260d98-40af-4bc3-bf59-050663eb1110 query:{} body:{} status:200
+method:DELETE url:/users/41260d98-40af-4bc3-bf59-050663eb1110 query:{} body:{} status:204
+method:POST url:/users query:{} body:{"name":"TEST_USER","login":"test_user","password":"T35t_P@55w0rd"} status:201
+method:DELETE url:/users/85524809-7ef2-478c-9f81-3f986578ce56 query:{} body:{} status:204
+method:POST url:/users query:{} body:{"name":"TEST_USER","login":"test_user","password":"T35t_P@55w0rd"} status:201
+method:PUT url:/users/acae1084-243c-490b-bfcb-6d2bc40c4da1 query:{} body:{"name":"Autotest updated TEST_USER","login":"test_user","password":"T35t_P@55w0rd","id":"acae1084-243c-490b-bfcb-6d2bc40c4da1"} status:200
+method:GET url:/users/acae1084-243c-490b-bfcb-6d2bc40c4da1 query:{} body:{} status:200
+method:DELETE url:/users/acae1084-243c-490b-bfcb-6d2bc40c4da1 query:{} body:{} status:204
+method:POST url:/users query:{} body:{"name":"TEST_USER","login":"test_user","password":"T35t_P@55w0rd"} status:201
+method:DELETE url:/users/daa1d6f5-363f-4638-897e-07181209b3ce query:{} body:{} status:204
+method:POST url:/users query:{} body:{"name":"TEST_USER","login":"test_user","password":"T35t_P@55w0rd"} status:201
+method:POST url:/boards query:{} body:{"title":"Autotest board","columns":[{"title":"Backlog","order":1},{"title":"Sprint","order":2}]} status:201
+method:POST url:/boards/c7ad3348-3eb2-4f7e-b7af-9e6e487eda56/tasks query:{} body:{"title":"Task #2","order":2,"description":"Lorem ipsum","userId":"6fd6c991-ff7e-4b0a-b762-9017ae33a78c","boardId":"c7ad3348-3eb2-4f7e-b7af-9e6e487eda56"} status:201
+method:POST url:/boards/c7ad3348-3eb2-4f7e-b7af-9e6e487eda56/tasks query:{} body:{"title":"Task #1","order":1,"description":"Lorem ipsum","userId":"6fd6c991-ff7e-4b0a-b762-9017ae33a78c","boardId":"c7ad3348-3eb2-4f7e-b7af-9e6e487eda56"} status:201
+method:DELETE url:/users/6fd6c991-ff7e-4b0a-b762-9017ae33a78c query:{} body:{} status:204
+method:GET url:/boards/c7ad3348-3eb2-4f7e-b7af-9e6e487eda56/tasks/77913219-1830-404c-a2b9-feb83c84ed41 query:{} body:{} status:200
+method:GET url:/boards/c7ad3348-3eb2-4f7e-b7af-9e6e487eda56/tasks/030a3a33-9159-4c7d-966b-2322540cb5b4 query:{} body:{} status:200
+method:DELETE url:/boards/c7ad3348-3eb2-4f7e-b7af-9e6e487eda56/tasks/77913219-1830-404c-a2b9-feb83c84ed41 query:{} body:{} status:204
+method:DELETE url:/boards/c7ad3348-3eb2-4f7e-b7af-9e6e487eda56/tasks/030a3a33-9159-4c7d-966b-2322540cb5b4 query:{} body:{} status:204
+method:DELETE url:/boards/c7ad3348-3eb2-4f7e-b7af-9e6e487eda56 query:{} body:{} status:204
+method:POST url:/boards query:{} body:{"title":"Autotest board","columns":[{"title":"Backlog","order":1},{"title":"Sprint","order":2}]} status:201
+method:POST url:/boards/6c47f319-2881-4e85-9f50-310ccb3292c7/tasks query:{} body:{"title":"Autotest task","order":0,"description":"Lorem ipsum","userId":null,"boardId":"6c47f319-2881-4e85-9f50-310ccb3292c7","columnId":null} status:201
+method:GET url:/boards/6c47f319-2881-4e85-9f50-310ccb3292c7/tasks query:{} body:{} status:200
+method:GET url:/boards/6c47f319-2881-4e85-9f50-310ccb3292c7/tasks query:{} body:{} status:200
+method:GET url:/boards/6c47f319-2881-4e85-9f50-310ccb3292c7/tasks/54971ddb-7142-458d-8294-13476e34c5f6 query:{} body:{} status:200
+method:POST url:/boards/6c47f319-2881-4e85-9f50-310ccb3292c7/tasks query:{} body:{"title":"Autotest task","order":0,"description":"Lorem ipsum","userId":null,"boardId":"6c47f319-2881-4e85-9f50-310ccb3292c7","columnId":null} status:201
+method:DELETE url:/boards/6c47f319-2881-4e85-9f50-310ccb3292c7/tasks/5da87865-547e-4ab4-97d3-6a737fc72248 query:{} body:{} status:204
+method:POST url:/boards/6c47f319-2881-4e85-9f50-310ccb3292c7/tasks query:{} body:{"title":"Autotest task","order":0,"description":"Lorem ipsum","userId":null,"boardId":"6c47f319-2881-4e85-9f50-310ccb3292c7","columnId":null} status:201
+method:PUT url:/boards/6c47f319-2881-4e85-9f50-310ccb3292c7/tasks/256b98df-f03a-4c48-bfe6-7408d8f5024c query:{} body:{"id":"256b98df-f03a-4c48-bfe6-7408d8f5024c","title":"Autotest updated task","order":0,"description":"Lorem ipsum","userId":null,"boardId":"6c47f319-2881-4e85-9f50-310ccb3292c7","columnId":null} status:200
+method:GET url:/boards/6c47f319-2881-4e85-9f50-310ccb3292c7/tasks/256b98df-f03a-4c48-bfe6-7408d8f5024c query:{} body:{} status:200
+method:GET url:/boards/6c47f319-2881-4e85-9f50-310ccb3292c7/tasks/54971ddb-7142-458d-8294-13476e34c5f6 query:{} body:{} status:200
+method:DELETE url:/boards/6c47f319-2881-4e85-9f50-310ccb3292c7/tasks/54971ddb-7142-458d-8294-13476e34c5f6 query:{} body:{} status:204
+method:GET url:/boards/6c47f319-2881-4e85-9f50-310ccb3292c7/tasks/54971ddb-7142-458d-8294-13476e34c5f6 query:{} body:{} status:404
+method:DELETE url:/boards/6c47f319-2881-4e85-9f50-310ccb3292c7 query:{} body:{} status:204
