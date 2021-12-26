@@ -1,4 +1,4 @@
-import { Context } from 'koa'
+import { Context, Next} from 'koa'
 import Router from '@koa/router'
 import {
   getAllService,
@@ -11,21 +11,23 @@ import {
 
 export const routerTask = new Router()
 
-routerTask.get('/boards/:boardId/tasks', async (ctx: Context):Promise<void> => {
+routerTask.get('/boards/:boardId/tasks', async (ctx: Context, next:Next):Promise<void> => {
   const {boardId} = ctx.params
     ctx.body = await getAllService(boardId)
+    next()
 })
 
-routerTask.get('/boards/:boardId/tasks/:taskId', async (ctx: Context):Promise<void> => {
+routerTask.get('/boards/:boardId/tasks/:taskId', async (ctx: Context, next:Next):Promise<void> => {
   const { taskId } = ctx.params
   const task = await getTaskService(taskId)
     if(!task) {
       ctx.status = 404
     } else
     ctx.body = task
+    next()
 })
 
-routerTask.post('/boards/:Id/tasks', async (ctx: Context):Promise<void> => {
+routerTask.post('/boards/:Id/tasks', async (ctx: Context, next:Next):Promise<void> => {
   const {Id} = ctx.params
   const inputTask = ctx.request.body
   inputTask.boardId = Id
@@ -49,17 +51,19 @@ routerTask.post('/boards/:Id/tasks', async (ctx: Context):Promise<void> => {
     columnId
   }
   ctx.status = 201
+  next()
 })
 
-routerTask.put('/boards/:boardId/tasks/:taskId', async (ctx: Context):Promise<void> => {
+routerTask.put('/boards/:boardId/tasks/:taskId', async (ctx: Context, next:Next):Promise<void> => {
   const { taskId } = ctx.params
   const inputTask = ctx.request.body
   const task = await updateTaskService( taskId, inputTask)
   ctx.body = task
   ctx.status = 200
+  next()
 })
 
-routerTask.delete('/boards/:boardId/tasks/:taskId', async (ctx: Context):Promise<void> => {
+routerTask.delete('/boards/:boardId/tasks/:taskId', async (ctx: Context, next:Next):Promise<void> => {
   const { boardId, taskId } = ctx.params
   const task = await getByIdService(boardId, taskId)
   if(!task) {
@@ -70,4 +74,5 @@ routerTask.delete('/boards/:boardId/tasks/:taskId', async (ctx: Context):Promise
     ctx.body = `task ${taskId} deleted`
     ctx.status = 204
   }
+  next()
 })

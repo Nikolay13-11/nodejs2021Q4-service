@@ -1,4 +1,5 @@
-import { getAllTasksService, updateTaskService } from '../tasks/task.service'
+import { StatusCodes } from 'http-status-codes';
+import { getAllTasksService } from '../tasks/task.service'
 import { IUser, IUserWoId } from "./models/user.model";
 import { ITask } from "../tasks/models/task.model";
 
@@ -9,6 +10,7 @@ import {
   updateUser,
   removeUser
 } from "./user.memory.repository";
+import { CustomError } from '../../logging/error.log';
 
 
 export const getAllService = async ():Promise<IUser[]> => {
@@ -18,6 +20,12 @@ export const getAllService = async ():Promise<IUser[]> => {
 
 export const getByIdService = async (id:string):Promise<IUser | undefined> => {
   const user = await getUserById(id);
+  if(user === undefined) {
+    throw new CustomError(
+      StatusCodes.NOT_FOUND,
+      `User not found`
+    );
+  }
   return user;
 }
 
@@ -27,16 +35,17 @@ export const createUserService = async (obj: IUser):Promise<IUser> => {
 }
 export const updateUserService = async(id:string, user:IUserWoId):Promise<IUser> => {
     const old:IUserWoId | undefined = await getByIdService(id)
-    const update:IUserWoId = {
-      name: '',
-      login: '',
-      password: ''
+    if(old === undefined) {
+      throw new CustomError(
+        StatusCodes.NOT_FOUND,
+        `User not found`
+      );
     }
-    if(old) {
-      update.name = user.name || old.name;
-      update.login = user.login || old.login;
-      update.password = user.password || old.password;
-      }
+    const update:IUserWoId = {
+      name: user.name || old.name,
+      login: user.login || old.login,
+      password: user.password || old.password
+    }
     const updUser = await updateUser(id, update)
       return updUser;
 }
@@ -45,9 +54,8 @@ export const deleteUserService = async (id:string):Promise<void> => {
   const tasks = await getAllTasksService()
   tasks.forEach((task: ITask) => {
     if(task.userId === id) {
-      updateTaskService(task.id, {
-        "userId": null,
-      })
+      // eslint-disable-next-line no-param-reassign
+      task.userId = null;
     }
   })
   await removeUser(id);

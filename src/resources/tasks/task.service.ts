@@ -33,14 +33,14 @@ export const createTaskService = async (obj: ITaskWoId):Promise<ITask> => {
     const newTask = await createNewTask(obj);
     return newTask;
 }
-export const updateTaskService = async( taskId: string, task: any):Promise<ITask> => {
+export const updateTaskService = async( taskId: string, task:ITaskWoId):Promise<ITask> => {
     const old: ITask | undefined = await getTaskService(taskId)
-    if( old === undefined) throw new Error("Board not found");
+    if( old === undefined) throw new Error("Task not found");
     const update:ITaskWoId = {
         title: task.title || old.title,
         order: task.order || old.order,
         description: task.description || old.description,
-        userId: task.userId,
+        userId: old.userId,
         boardId: task.boardId || old.boardId,
         columnId: task.columnId || old.columnId,
     }

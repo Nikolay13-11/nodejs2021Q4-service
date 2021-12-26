@@ -11,7 +11,7 @@ export interface ITaskWoId {
     title: string;
     order: number;
     description: string;
-    userId: string | null;
+    userId: null | string;
     boardId: string;
     columnId: string;
 }
