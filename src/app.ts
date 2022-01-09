@@ -8,7 +8,6 @@ import { logger, loggerError } from './logging/logger'; // Winston instance.
 
 export const app = new Koa()
 
-
 // app.use(errorHundler)
 
 app.use(bodyParser())
