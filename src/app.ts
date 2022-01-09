@@ -5,7 +5,6 @@ import { routerTask } from './resources/tasks/task.router'
 import { boardRouter } from './resources/boards/boards.router'
 import { logger, loggerError } from './logging/logger'; // Winston instance.
 
-
 export const app = new Koa()
 
 // app.use(errorHundler)
@@ -21,7 +20,11 @@ app.use(routerTask.routes())
 
 app.use(async (ctx, next) => {
     await next()
-    logger.info(ctx)
+    if (ctx.status > 400) {
+      logger.warn(ctx)
+    } else {
+      logger.info(ctx)
+    }
   });
 
 app.on('error', (err: Error) => {
