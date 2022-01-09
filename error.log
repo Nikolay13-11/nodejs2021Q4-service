@@ -1,0 +1,12 @@
+Sun Dec 26 2021 23:49:19 GMT+0300 (Москва, стандартное время) Error: uncaughtException: Oops!
+Error: Oops!
+    at Object.<anonymous> (D:\RS\NodeJS\nodejs2021Q4-service\src\app.ts:32:7)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Module.m._compile (D:\RS\NodeJS\nodejs2021Q4-service\node_modules\ts-node\src\index.ts:1371:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\RS\NodeJS\nodejs2021Q4-service\node_modules\ts-node\src\index.ts:1374:12)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Module.require (node:internal/modules/cjs/loader:1005:19)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at Object.<anonymous> (D:\RS\NodeJS\nodejs2021Q4-service\src\server.ts:1:1)

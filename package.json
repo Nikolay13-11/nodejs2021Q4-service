@@ -9,7 +9,8 @@
   "description": "REST service starter for RS School",
   "main": "src/server.js",
   "scripts": {
-    "start": "nodemon src/server.js",
+    "start": "nodemon --legacy-watch src/server.ts --exitcrash",
+    "build": "tsc ./src/server.ts",
     "lint": "eslint --ext .js,.ts --fix src/",
     "test": "cross-env DEBUG=rs:* jest --testMatch \"<rootDir>/test/e2e/test/*.test.js\" --noStackTrace --runInBand",
     "test:auth": "cross-env DEBUG=rs:* TEST_MODE=auth jest --noStackTrace"
@@ -44,18 +45,32 @@
     ]
   },
   "dependencies": {
+    "@koa/router": "^10.1.1",
     "cross-env": "7.0.3",
     "dotenv": "10.0.0",
-    "express": "4.17.1",
-    "swagger-ui-express": "4.1.6",
-    "uuid": "8.3.2",
-    "yamljs": "0.3.0"
+    "http-status-codes": "^2.1.4",
+    "koa": "^2.13.4",
+    "koa-bodyparser": "^4.3.0",
+    "koa-json": "^2.0.2",
+    "koa-logger-winston": "^0.0.2",
+    "koa-pino-logger": "^3.0.0",
+    "pino": "^7.6.0",
+    "uuid": "^8.3.2",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
+    "@types/koa": "^2.13.4",
+    "@types/koa__router": "^8.0.11",
+    "@types/koa-bodyparser": "^4.3.4",
+    "@types/koa-logger-winston": "^0.0.2",
+    "@types/koa-pino-logger": "^3.0.1",
+    "@types/uuid": "^8.3.3",
+    "@typescript-eslint/eslint-plugin": "^5.6.0",
+    "@typescript-eslint/parser": "^5.6.0",
     "chai": "4.3.4",
     "debug": "4.3.2",
     "dirty-chai": "2.0.1",
-    "eslint": "8.2.0",
+    "eslint": "^8.2.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-import": "2.25.3",
@@ -66,6 +81,8 @@
     "lint-staged": "12.0.3",
     "nodemon": "2.0.15",
     "prettier": "2.4.1",
-    "supertest": "6.1.6"
+    "supertest": "6.1.6",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.2"
   }
 }
