@@ -1,0 +1,38 @@
+version: '3.0'
+
+volumes:
+  service-vol:
+  postgres-vol:
+
+services:
+  node-service:
+    image: node-servise
+    build: .
+    ports:
+      - ${PORT}:${PORT}
+    restart: unless-stopped
+    volumes:
+      - service-vol:/app/logs
+      - ./:/app
+      # - ./:/app/node_modules
+    depends_on:
+      - node-base
+    networks:
+      - network
+  node-base:
+    image: node-base
+    build: postgres
+    ports:
+      - ${Postgras_PORT}:${Postgras_PORT}
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD : ${POSTGRES_PASSWORD}
+    restart: unless-stopped
+    volumes:
+      - postgres-vol:/var/lib/postgresql/data
+    networks:
+      - network
+networks:
+  network:
+    name: my-bridge
