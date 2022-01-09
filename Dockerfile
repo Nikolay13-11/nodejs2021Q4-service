@@ -6,10 +6,8 @@ WORKDIR /app/src
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm install --production
 
 COPY . .
-
-# VOLUME [ "/data" ]
 
 CMD [ "npm", "run", "start" ]

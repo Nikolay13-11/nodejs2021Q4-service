@@ -8,13 +8,13 @@ services:
   node-service:
     image: node-servise
     build: .
+    env_file: .env
     ports:
       - ${PORT}:${PORT}
-    restart: unless-stopped
+    restart: always
     volumes:
       - service-vol:/app/logs
       - ./:/app
-      # - ./:/app/node_modules
     depends_on:
       - node-base
     networks:
@@ -22,13 +22,14 @@ services:
   node-base:
     image: node-base
     build: postgres
+    env_file: .env
     ports:
       - ${Postgras_PORT}:${Postgras_PORT}
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD : ${POSTGRES_PASSWORD}
-    restart: unless-stopped
+    restart: always
     volumes:
       - postgres-vol:/var/lib/postgresql/data
     networks:
@@ -36,3 +37,4 @@ services:
 networks:
   network:
     name: my-bridge
+    driver: bridge
