@@ -65,3 +65,8 @@ method:GET url:/boards/6c47f319-2881-4e85-9f50-310ccb3292c7/tasks/54971ddb-7142-
 method:DELETE url:/boards/6c47f319-2881-4e85-9f50-310ccb3292c7/tasks/54971ddb-7142-458d-8294-13476e34c5f6 query:{} body:{} status:204
 method:GET url:/boards/6c47f319-2881-4e85-9f50-310ccb3292c7/tasks/54971ddb-7142-458d-8294-13476e34c5f6 query:{} body:{} status:404
 method:DELETE url:/boards/6c47f319-2881-4e85-9f50-310ccb3292c7 query:{} body:{} status:204
+method:GET url:/users query:{} body:{} status:200
+method:GET url:/users query:{} body:{} status:200
+method:GET url:/users query:{} body:{} status:200
+method:GET url:/users/gggg query:{} body:{} status:404
+method:GET url:/users/gggg query:{} body:{} status:404

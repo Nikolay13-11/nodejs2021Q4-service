@@ -22,6 +22,7 @@ routerUser.get('/users/:id', async (ctx: Context, next:Next):Promise<void> => {
   const {id} = ctx.params
   const user = await getByIdService(id)
   if(!user) {
+    ctx.body = 'User not found'
     ctx.status = 404
   } else
     ctx.body = user
