@@ -1,3 +1,3 @@
-From postgres:14-alpine
+FROM postgres:alpine3.15
 
 # VOLUME [ "/logsBd" ]
