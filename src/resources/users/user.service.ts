@@ -1,4 +1,4 @@
-import { getAllTasksService } from '../tasks/task.service'
+import { getAllTasksService, updateTaskService } from '../tasks/task.service'
 import { IUser, IUserWoId } from "./models/user.model";
 import { ITask } from "../tasks/models/task.model";
 
@@ -9,7 +9,7 @@ import {
   updateUser,
   removeUser
 } from "./user.memory.repository";
-
+import { User } from './user.model';
 
 export const getAllService = async ():Promise<IUser[]> => {
   const allUsers = await getAll();
@@ -26,7 +26,7 @@ export const createUserService = async (obj: IUser):Promise<IUser> => {
   const newUser = await createNewUser(obj);
   return newUser;
 }
-export const updateUserService = async(id:string, user:IUserWoId):Promise<IUser> => {
+export const updateUserService = async(id:string, user:IUserWoId):Promise<Partial<User> | User> => {
     const old:IUserWoId | undefined = await getByIdService(id)
     if(old === undefined) {
       throw new Error(
@@ -39,7 +39,7 @@ export const updateUserService = async(id:string, user:IUserWoId):Promise<IUser>
       password: user.password || old.password
     }
     const updUser = await updateUser(id, update)
-      return updUser;
+    return updUser;
 }
 
 export const deleteUserService = async (id:string):Promise<void> => {
@@ -47,7 +47,10 @@ export const deleteUserService = async (id:string):Promise<void> => {
   tasks.forEach((task: ITask) => {
     if(task.userId === id) {
       // eslint-disable-next-line no-param-reassign
-      task.userId = null;
+      task.userId = null
+      updateTaskService(task.id, task)
+      // // eslint-disable-next-line no-param-reassign
+      // task.userId = null;
     }
   })
   await removeUser(id);

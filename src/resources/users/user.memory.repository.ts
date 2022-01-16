@@ -1,27 +1,32 @@
 import { IUser, IUserWoId } from "./models/user.model";
 import { User } from "./user.model";
 
-let users: IUser[] = []
+export const getAll = async (): Promise<IUser[]> => {
+  const allUsers =  await User.find();
+  return allUsers
+};
 
-export const getAll = ():IUser[] => users;
+export const getUserById = async (id: string): Promise<User | undefined> => {
+  const user = await User.findOne(id)
+  return user
+}
 
-export const getUserById = (id: string):IUser | undefined => users.find(user => user.id === id)
-
-export const createNewUser = (obj: IUser): IUser => {
+export const createNewUser = async (obj: IUser): Promise<IUser> => {
   const newUser = new User(obj)
-  users.push(newUser)
+  User.getRepository().save(newUser)
   return newUser
 }
 
-export const updateUser = (id: string, user: IUserWoId): IUser => {
-  const index = users.findIndex(i => i.id === id)
-  users[index] = {
-    id,
-    ...user
+export const updateUser = async (id: string, user: IUserWoId): Promise<User | Partial<User>>  => {
+  let targetUser: Partial<User> | undefined= await getUserById(id)
+  targetUser = {
+    id, ...user
   }
-  return users[index]
+  await User.getRepository().save(targetUser)
+  return targetUser
 }
 
-export const removeUser = (id: string): void => {
-  users = users.filter(user => user.id !== id)
+export const removeUser = async (id: string): Promise<void> => {
+  const user = await User.findOne(id)
+  await user?.remove()
   };

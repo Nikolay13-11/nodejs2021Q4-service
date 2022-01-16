@@ -14,8 +14,6 @@ export const routerUser = new Router()
 routerUser.get('/users', async (ctx: Context, next:Next):Promise<void> => {
     ctx.body = await getAllService()
     next()
-    // Promise.reject(Error('Oops!'));
-  // throw Error('Oops!');
 })
 
 routerUser.get('/users/:id', async (ctx: Context, next:Next):Promise<void> => {
