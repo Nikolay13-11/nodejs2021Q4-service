@@ -8,6 +8,7 @@ import {
   deleteBoardService
 }
 from './boards.service'
+import { IBoardWoId } from './models/board.model'
 
 export const boardRouter = new Router()
 

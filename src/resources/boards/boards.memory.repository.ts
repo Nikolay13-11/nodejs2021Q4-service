@@ -1,27 +1,32 @@
 import { Board } from './boards.model'
-import { IBoard, IBoardWoId } from './models/board.model'
+import { IBoardWoId } from './models/board.model'
 
-let boards: IBoard[] = []
+export const getAll = async (): Promise<Board[]> => {
+  const allBoards = await Board.find()
+  return allBoards
+}
 
-export const getAll = (): IBoard[] => boards;
+export const getBoardById = async (id: string): Promise<Board | undefined> => {
+  const board = await Board.findOne(id)
+  return board
+}
 
-export const getBoardById = (id: string): IBoard | undefined => boards.find(board => board.id === id)
-
-export const createNewBoard = (obj: IBoardWoId): IBoard => {
+export const createNewBoard = async (obj: any): Promise<Board> => {
   const newBoard = new Board(obj)
-  boards.push(newBoard)
+  Board.getRepository().save(newBoard)
   return newBoard
 }
 
-export const updateBoard = (id: string, board: IBoardWoId) => {
-  const index = boards.findIndex((i) => i.id === id)
-  boards[index] = {
-    id,
-    ...board
+export const updateBoard = async (id: string, board: IBoardWoId): Promise<Board | Partial<Board>> => {
+  let targetBoard: Partial<Board> | undefined = await getBoardById(id)
+  targetBoard = {
+    id, ...board
   }
-  return boards[index]
+  Board.getRepository().save(targetBoard)
+  return targetBoard
 }
 
-export const removeBoard = (id: string): void => {
-  boards = boards.filter((board) => board.id !== id)
+export const removeBoard = async (id: string): Promise<void> => {
+  const board = await Board.findOne(id)
+  await board?.remove()
   };

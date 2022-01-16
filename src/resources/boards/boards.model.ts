@@ -1,22 +1,27 @@
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 import { v4 as uuidv4 } from 'uuid'
 import { IBoard, IColumns } from './models/board.model'
 
+@Entity()
+export class Board extends BaseEntity{
 
-export class Board {
+  @PrimaryGeneratedColumn("uuid")
   id: string
 
+  @Column()
   title: string
 
-  columns: IColumns[]
+  // @OneToOne(() => ColumnClass)
+  // columns: ColumnClass[]
+
+  @Column('json', {nullable: true})
+  columns: IColumns[] | null
 
   constructor({
     title = 'Title',
-    columns = [{
-      id: '1',
-      title: 'title',
-      order: '1'
-    }],
+    columns = []
   } = {}) {
+    super()
     this.id = uuidv4();
     this.title = title;
     this.columns = columns;
