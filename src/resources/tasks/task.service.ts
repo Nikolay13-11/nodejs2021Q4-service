@@ -1,13 +1,14 @@
 import { ITask, ITaskWoId } from './models/task.model';
 import {
-    getAllTasks,
     getTask,
     getAllOnBoardById,
     getTaskById,
     createNewTask,
     updateTask,
-    removeTask
+    removeTask,
+    getAllTasks
 } from './task.memory.repository'
+import { Task } from './task.model';
 
 export const getAllTasksService = async ():Promise<ITask[] | []> => {
     const allTsks = await getAllTasks();
@@ -19,7 +20,7 @@ export const getTaskService = async (id: string):Promise<ITask | undefined> => {
     return tasks
 }
 
-export const getAllService = async (boardId: string):Promise<ITask[] | undefined> => {
+export const getAllService = async (boardId: string):Promise<Task | undefined> => {
     const allTasks = await getAllOnBoardById(boardId);
     return allTasks
 } 
@@ -33,7 +34,7 @@ export const createTaskService = async (obj: ITaskWoId):Promise<ITask> => {
     const newTask = await createNewTask(obj);
     return newTask;
 }
-export const updateTaskService = async( taskId: string, task:ITaskWoId):Promise<ITask> => {
+export const updateTaskService = async ( taskId: string, task:ITaskWoId):Promise<Partial<Task> | Task> => {
     const old: ITask | undefined = await getTaskService(taskId)
     if( old === undefined) throw new Error("Task not found");
     const update:ITaskWoId = {
@@ -49,7 +50,6 @@ export const updateTaskService = async( taskId: string, task:ITaskWoId):Promise<
 }
 
 export const deleteTaskService = async (boardId:string, taskId:string):Promise<void> => {
-    const delTask = await removeTask(boardId, taskId);
-    return delTask;
+    await removeTask(boardId, taskId);
 } 
 

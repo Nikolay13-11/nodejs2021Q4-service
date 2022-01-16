@@ -1,19 +1,32 @@
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 import { ITask } from "./models/task.model";
 
-export class Task {
+@Entity()
+export class Task extends BaseEntity{
+
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
+  @Column()
   title: string;
 
+  @Column()
   order: number;
 
+  @Column()
   description: string;
 
+  @Column({
+    type: 'text',
+    nullable: true
+  })
   userId: string | null;
 
+  @Column()
   boardId: string;
 
+  @Column({nullable:true})
   columnId: string;
  
   constructor({
@@ -21,10 +34,11 @@ export class Task {
     title = 'Title',
     order = 1,
     description = '',
-    userId = null,
+    userId = '',
     boardId = '',
     columnId = ''
   } = {}) {
+    super()
     this.id = id;
     this.title = title;
     this.order = order;

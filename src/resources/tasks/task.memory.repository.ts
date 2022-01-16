@@ -2,32 +2,43 @@ import { ITask, ITaskWoId, ITest } from './models/task.model'
 
 import { Task } from './task.model'
 
-let tasks: ITask[] = []
+export const getAllTasks = async (): Promise<ITask[] | []> => {
+  const allTasks = await Task.find()
+  return allTasks
+};
 
-export const getAllTasks = (): ITask[] | [] => tasks;
-
-export const getTask = (taskId: string):ITask | undefined => {
-  const allTasks = tasks.find(task => task.id === taskId);
-  return allTasks;
+export const getTask = async (taskId: string): Promise<Task | undefined> => {
+  const task = await Task.findOne(taskId)
+  return task;
 }
 
-export const getAllOnBoardById = (boardId: string) => tasks.filter(task => task.boardId === boardId);
+export const getAllOnBoardById = async (boardId: string): Promise<Task | undefined> => {
+  const tasksOnBoard = await Task.findOne(boardId)
+  return tasksOnBoard
+}
 
-export const getTaskById = (boardId: string, taskId: string): ITask | undefined => tasks.find(task => task.boardId === boardId && task.id === taskId)
+export const getTaskById = async (boardId: string, taskId: string): Promise<ITask | undefined> => {
+  const task = await getTask(taskId || boardId)
+  return task
+}
 
-export const createNewTask = (obj: ITest): ITask => {
-  const newTask: Task = new Task(obj)
-  tasks.push(newTask)
+export const createNewTask = async (obj: ITest): Promise<ITask> => {
+  const newTask = new Task(obj)
+  Task.getRepository().save(newTask)
   return newTask
 }
 
-export const updateTask = (id: string, task: ITaskWoId): ITask => {
-  const index = tasks.findIndex(i => i.id === id)
-  tasks[index] = { id, ...task }
-  return tasks[index]
+export const updateTask = async (id: string, task: ITaskWoId): Promise<Task | Partial<Task>> => {
+  let targetTask: Partial<Task> | undefined = await Task.findOne(id)
+  targetTask = {
+    id, ...task
+  }
+  await Task.getRepository().save(targetTask)
+  return targetTask
 }
 
-export const removeTask = (boardId: string, taskId: string): void => {
-  tasks = tasks.filter(task => ((task.boardId !== boardId || task.boardId === boardId) && task.id !== taskId))
+export const removeTask = async (boardId: string, taskId: string): Promise<void> => {
+  const task = await Task.findOne(taskId || boardId)
+  await task?.remove()
 };
  
