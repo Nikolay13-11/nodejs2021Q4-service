@@ -1,12 +1,10 @@
 import  bodyParser from 'koa-bodyparser';
 import Koa from 'koa';
-import { createConnection } from 'typeorm';
 import { routerUser } from './resources/users/user.router'
 import { routerTask } from './resources/tasks/task.router'
 import { boardRouter } from './resources/boards/boards.router'
 import { logger, loggerError } from './logging/logger'; // Winston instance.
 import "reflect-metadata";
-import { configORM } from './ormconfig';
 
 
 export const app = new Koa()
