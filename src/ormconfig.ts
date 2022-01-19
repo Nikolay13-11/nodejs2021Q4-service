@@ -1,3 +1,4 @@
+import path from "path";
 import { ConnectionOptions } from "typeorm";
 import {
     POSTGRES_PORT,
@@ -18,9 +19,10 @@ import {
     logging: false,
     entities: ['src/resources/**/**.model{.ts,.js}'],
     migrationsRun: true,
-    migrations: ["src/migration/**/*.ts"],
+    dropSchema: true,
+    migrations: [path.join(__dirname, '/migrations/**/*.ts')],
     cli: {
-        "migrationsDir": "src/migration",
+        "migrationsDir": "./src/migration",
     },
 } as ConnectionOptions
 
