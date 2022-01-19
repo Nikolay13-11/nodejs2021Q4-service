@@ -19,7 +19,7 @@ export const getByIdService = async (id:string):Promise<Board | undefined> => {
     return board;
 }
 
-export const createBoardService = async (obj: IBoardWoId):Promise<Board> => {
+export const createBoardService = async (obj: Board):Promise<Board> => {
     const newBoard = await createNewBoard(obj);
     return newBoard;
 }
@@ -38,11 +38,11 @@ export const updateBoardService = async(id:string, board: IBoardWoId):Promise<Pa
 }
 
 export const deleteBoardService = async (id:string):Promise<void> => {
-    const tasks: ITask[] = await getAllTasksService()
-    tasks.forEach(task => {
-        if(task.boardId === id) {
-            deleteTaskService(id, task.id)
-        }
-    })
+    // const tasks: ITask[] = await getAllTasksService()
+    // tasks.forEach(task => {
+    //     if(task.boardId === id) {
+    //         deleteTaskService(id, task.id)
+    //     }
+    // })
     await removeBoard(id);
 }

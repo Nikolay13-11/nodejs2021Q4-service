@@ -1,71 +1,38 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
+import { Board } from '../boards/boards.model';
+import { User } from '../users/user.model';
 import { ITask } from "./models/task.model";
 
 @Entity()
 export class Task extends BaseEntity{
 
   @PrimaryGeneratedColumn("uuid")
-  id: string;
+  id!: string;
 
   @Column()
-  title: string;
+  title!: string;
 
   @Column()
-  order: number;
+  order!: number;
 
   @Column()
-  description: string;
+  description!: string;
 
-  @Column({
-    type: 'text',
-    nullable: true
-  })
-  userId: string | null;
+  @ManyToOne(() => User, (user) => user.tasks, { onDelete: 'SET NULL'})
+  @JoinColumn({ name: 'userId' })
+  user!: string;
 
-  @Column()
-  boardId: string;
+  @Column({ nullable: true })
+  userId!: string | null;
+
+  @ManyToOne(() => Board, (board) => board.tasks, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'boardId' })
+  board!: string;
+
+  @Column({ nullable: true })
+  boardId!: string;
 
   @Column({nullable:true})
-  columnId: string;
- 
-  constructor({
-    id = uuidv4(),
-    title = 'Title',
-    order = 1,
-    description = '',
-    userId = '',
-    boardId = '',
-    columnId = ''
-  } = {}) {
-    super()
-    this.id = id;
-    this.title = title;
-    this.order = order;
-    this.description = description;
-    this.userId = userId;
-    this.boardId = boardId;
-    this.columnId = columnId;
-  }
-
-  static toResponse(task: ITask) {
-    const {
-      id,
-      title,
-      order,
-      description,
-      userId,
-      boardId,
-      columnId
-    } = task;
-    return {
-      id,
-      title,
-      order,
-      description,
-      userId,
-      boardId,
-      columnId
-    };
-  }
+  columnId!: string;
 }

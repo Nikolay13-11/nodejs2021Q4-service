@@ -11,9 +11,10 @@ export const getUserById = async (id: string): Promise<User | undefined> => {
   return user
 }
 
-export const createNewUser = async (obj: IUser): Promise<IUser> => {
-  const newUser = new User(obj)
-  User.getRepository().save(newUser)
+export const createNewUser = async (obj: User): Promise<IUser> => {
+  // const newUser = new User(obj)
+  const newUser = await User.getRepository().create({...obj})
+  await User.getRepository().save(newUser)
   return newUser
 }
 

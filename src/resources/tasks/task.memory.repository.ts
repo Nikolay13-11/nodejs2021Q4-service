@@ -12,8 +12,8 @@ export const getTask = async (taskId: string): Promise<Task | undefined> => {
   return task;
 }
 
-export const getAllOnBoardById = async (boardId: string): Promise<Task | undefined> => {
-  const tasksOnBoard = await Task.findOne(boardId)
+export const getAllOnBoardById = async (boardId: string): Promise<Task[] | undefined> => {
+  const tasksOnBoard = await Task.find({where: {boardId}})
   return tasksOnBoard
 }
 
@@ -23,8 +23,9 @@ export const getTaskById = async (boardId: string, taskId: string): Promise<ITas
 }
 
 export const createNewTask = async (obj: ITest): Promise<ITask> => {
-  const newTask = new Task(obj)
-  Task.getRepository().save(newTask)
+  // const newTask = new Task(obj)
+  const newTask = await Task.getRepository().create({...obj})
+  await Task.getRepository().save(newTask)
   return newTask
 }
 

@@ -20,7 +20,7 @@ export const getTaskService = async (id: string):Promise<ITask | undefined> => {
     return tasks
 }
 
-export const getAllService = async (boardId: string):Promise<Task | undefined> => {
+export const getAllService = async (boardId: string):Promise<Task[] | undefined> => {
     const allTasks = await getAllOnBoardById(boardId);
     return allTasks
 } 
@@ -41,7 +41,7 @@ export const updateTaskService = async ( taskId: string, task:ITaskWoId):Promise
         title: task.title || old.title,
         order: task.order || old.order,
         description: task.description || old.description,
-        userId: old.userId,
+        userId: task.userId || old.userId,
         boardId: task.boardId || old.boardId,
         columnId: task.columnId || old.columnId,
     }

@@ -22,7 +22,7 @@ export const getByIdService = async (id:string):Promise<IUser | undefined> => {
   return user;
 }
 
-export const createUserService = async (obj: IUser):Promise<IUser> => {
+export const createUserService = async (obj: User):Promise<IUser> => {
   const newUser = await createNewUser(obj);
   return newUser;
 }
@@ -43,15 +43,15 @@ export const updateUserService = async(id:string, user:IUserWoId):Promise<Partia
 }
 
 export const deleteUserService = async (id:string):Promise<void> => {
-  const tasks = await getAllTasksService()
-  tasks.forEach((task: ITask) => {
-    if(task.userId === id) {
-      // eslint-disable-next-line no-param-reassign
-      task.userId = null
-      updateTaskService(task.id, task)
-      // // eslint-disable-next-line no-param-reassign
-      // task.userId = null;
-    }
-  })
+  // const tasks = await getAllTasksService()
+  // tasks.forEach((task: ITask) => {
+  //   if(task.userId === id) {
+  //     // eslint-disable-next-line no-param-reassign
+  //     task.userId = null
+  //     updateTaskService(task.id, task)
+  //     // // eslint-disable-next-line no-param-reassign
+  //     // task.userId = null;
+  //   }
+  // })
   await removeUser(id);
 }

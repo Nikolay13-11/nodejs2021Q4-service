@@ -11,9 +11,10 @@ export const getBoardById = async (id: string): Promise<Board | undefined> => {
   return board
 }
 
-export const createNewBoard = async (obj: any): Promise<Board> => {
-  const newBoard = new Board(obj)
-  Board.getRepository().save(newBoard)
+export const createNewBoard = async (obj: Board): Promise<Board> => {
+  // const newBoard = new Board(obj)
+  const newBoard = await Board.getRepository().create({...obj})
+  await Board.getRepository().save(newBoard)
   return newBoard
 }
 
@@ -22,7 +23,7 @@ export const updateBoard = async (id: string, board: IBoardWoId): Promise<Board 
   targetBoard = {
     id, ...board
   }
-  Board.getRepository().save(targetBoard)
+  await Board.getRepository().save(targetBoard)
   return targetBoard
 }
 

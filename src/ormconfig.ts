@@ -1,7 +1,4 @@
 import { ConnectionOptions } from "typeorm";
-import { Board } from "./resources/boards/boards.model";
-import { Task } from "./resources/tasks/task.model";
-import { User } from "./resources/users/user.model";
 import {
     POSTGRES_PORT,
     POSTGRES_DB,
@@ -10,15 +7,20 @@ import {
     POSTGRES_HOST
 } from "./common/config";
 
-export const configORM: ConnectionOptions = {
+ export default {
     type: 'postgres',
     host: POSTGRES_HOST,
     port: POSTGRES_PORT ? Number(POSTGRES_PORT): 5432,
     username: POSTGRES_USER,
     password: POSTGRES_PASSWORD,
     database: POSTGRES_DB || 'postgres',
-    synchronize: true,
+    synchronize: false,
     logging: false,
-    entities: [User, Board, Task],
-    // migrationsRun: true,
-}
+    entities: ['src/resources/**/**.model{.ts,.js}'],
+    migrationsRun: true,
+    migrations: ["src/migration/**/*.ts"],
+    cli: {
+        "migrationsDir": "src/migration",
+    },
+} as ConnectionOptions
+

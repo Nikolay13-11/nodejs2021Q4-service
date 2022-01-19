@@ -2,12 +2,12 @@ import { createConnection } from "typeorm";
 import { app } from "./app";
 
 import { ports } from './common/config';
-import { configORM } from "./ormconfig";
 
 import { loggerStart } from './logging/logger';
+import ormconfig from "./ormconfig";
 
 (async () => {
-    await createConnection(configORM)
+    await createConnection(ormconfig)
 })()
 // createConnection(configORM)
 
