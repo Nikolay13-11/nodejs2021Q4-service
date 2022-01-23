@@ -5,6 +5,7 @@ import { routerTask } from './resources/tasks/task.router'
 import { boardRouter } from './resources/boards/boards.router'
 import { logger, loggerError } from './logging/logger'; // Winston instance.
 import "reflect-metadata";
+import { routerLogin } from './resources/login/login.router';
 
 
 export const app = new Koa()
@@ -21,6 +22,8 @@ app.use(boardRouter.routes())
 .use(boardRouter.allowedMethods())
 app.use(routerTask.routes())
 .use(routerTask.allowedMethods())
+app.use(routerLogin.routes())
+.use(routerLogin.allowedMethods())
 
 app.use(async (ctx, next) => {
     await next()
