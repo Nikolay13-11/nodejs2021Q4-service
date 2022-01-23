@@ -1,6 +1,4 @@
-import { getAllTasksService, deleteTaskService } from '../tasks/task.service'
 import { IBoardWoId } from './models/board.model';
-import { ITask } from '../tasks/models/task.model'
 import {
     getAll,
     getBoardById,

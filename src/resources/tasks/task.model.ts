@@ -1,8 +1,6 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
-import { v4 as uuidv4 } from 'uuid';
 import { Board } from '../boards/boards.model';
 import { User } from '../users/user.model';
-import { ITask } from "./models/task.model";
 
 @Entity()
 export class Task extends BaseEntity{

@@ -1,6 +1,4 @@
-import { getAllTasksService, updateTaskService } from '../tasks/task.service'
 import { IUser, IUserWoId } from "./models/user.model";
-import { ITask } from "../tasks/models/task.model";
 
 import {
   getAll,
@@ -10,6 +8,7 @@ import {
   removeUser
 } from "./user.memory.repository";
 import { User } from './user.model';
+import { generateHash } from '../../common/middleware/auth';
 
 export const getAllService = async ():Promise<IUser[]> => {
   const allUsers = await getAll();
@@ -36,22 +35,12 @@ export const updateUserService = async(id:string, user:IUserWoId):Promise<Partia
     const update:IUserWoId = {
       name: user.name || old.name,
       login: user.login || old.login,
-      password: user.password || old.password
+      password: await generateHash(user.password) || old.password
     }
     const updUser = await updateUser(id, update)
     return updUser;
 }
 
 export const deleteUserService = async (id:string):Promise<void> => {
-  // const tasks = await getAllTasksService()
-  // tasks.forEach((task: ITask) => {
-  //   if(task.userId === id) {
-  //     // eslint-disable-next-line no-param-reassign
-  //     task.userId = null
-  //     updateTaskService(task.id, task)
-  //     // // eslint-disable-next-line no-param-reassign
-  //     // task.userId = null;
-  //   }
-  // })
   await removeUser(id);
 }

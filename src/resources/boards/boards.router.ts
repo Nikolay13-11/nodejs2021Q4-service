@@ -8,53 +8,53 @@ import {
   deleteBoardService
 }
 from './boards.service'
-import { IBoardWoId } from './models/board.model'
+import { varifyToken } from '../../common/middleware/auth'
 
 export const boardRouter = new Router()
 
-boardRouter.get('/boards', async (ctx: Context, next:Next):Promise<void> => {
+boardRouter.get('/boards', varifyToken, async (ctx: Context, next:Next):Promise<void> => {
     ctx.body = await getAllService()
-    next()
+    await next()
 })
 
-boardRouter.get('/boards/:id', async (ctx: Context, next:Next):Promise<void> => {
+boardRouter.get('/boards/:id', varifyToken, async (ctx: Context, next:Next):Promise<void> => {
   const {id} = ctx.params
   const board = await getByIdService(id)
   if(!board) {
     ctx.status = 404
   } else
     ctx.body = board
-    next()
+    await next()
 })
 
-boardRouter.post('/boards', async (ctx: Context, next:Next):Promise<void> => {
+boardRouter.post('/boards', varifyToken, async (ctx: Context, next:Next):Promise<void> => {
   const inputBoard = ctx.request.body
   const board = await createBoardService(inputBoard)
   const { id, title, columns } = board
   ctx.body = { id, title, columns }
   ctx.status = 201
-  next()
+  await next()
 })
 
-boardRouter.put('/boards/:id', async (ctx: Context, next:Next):Promise<void> => {
+boardRouter.put('/boards/:id', varifyToken, async (ctx: Context, next:Next):Promise<void> => {
   const {id} = ctx.params
   const inputBoard = ctx.request.body
   const board = await updateBoardService(id, inputBoard)
   
   ctx.body = board
-  next()
+  await next()
 })
 
-boardRouter.delete('/boards/:id', async (ctx: Context, next:Next):Promise<void> => {
+boardRouter.delete('/boards/:id', varifyToken, async (ctx: Context, next:Next):Promise<void> => {
   const {id} = ctx.params
   const board = await getByIdService(id)
   if(!board) {
     ctx.status = 404
   }
   else {
-    deleteBoardService(id)
+    await deleteBoardService(id)
     ctx.body = `board ${id} deleted`
     ctx.status = 204
   }
-  next()
+  await next()
 })

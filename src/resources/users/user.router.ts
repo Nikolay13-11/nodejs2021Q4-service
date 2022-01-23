@@ -7,16 +7,17 @@ import {
   updateUserService,
   deleteUserService
 } from "./user.service";
+import { varifyToken } from '../../common/middleware/auth';
 
 
 export const routerUser = new Router()
 
-routerUser.get('/users', async (ctx: Context, next:Next):Promise<void> => {
+routerUser.get('/users', varifyToken, async (ctx: Context, next:Next):Promise<void> => {
     ctx.body = await getAllService()
-    next()
+    await next()
 })
 
-routerUser.get('/users/:id', async (ctx: Context, next:Next):Promise<void> => {
+routerUser.get('/users/:id', varifyToken, async (ctx: Context, next:Next):Promise<void> => {
   const {id} = ctx.params
   const user = await getByIdService(id)
   if(!user) {
@@ -24,38 +25,38 @@ routerUser.get('/users/:id', async (ctx: Context, next:Next):Promise<void> => {
     ctx.status = 404
   } else
     ctx.body = user
-    next()
+    await next()
 })
 
-routerUser.post('/users', async (ctx: Context, next:Next):Promise<void> => {
+routerUser.post('/users', varifyToken, async (ctx: Context, next:Next):Promise<void> => {
   const inputUser = ctx.request.body
   const user = await createUserService(inputUser)
   const { id, name, login } = user
   ctx.body = { id, name, login}
   ctx.status = 201
-  next()
+  await next()
 })
 
-routerUser.put('/users/:id', async (ctx: Context, next:Next):Promise<void> => {
+routerUser.put('/users/:id', varifyToken, async (ctx: Context, next:Next):Promise<void> => {
   const {id} = ctx.params
   const inputUser = ctx.request.body
   const user = await updateUserService(id, inputUser)
   
   ctx.body = user
-  next()
+  await next()
 })
 
-routerUser.delete('/users/:id', async (ctx: Context, next:Next):Promise<void> => {
+routerUser.delete('/users/:id', varifyToken, async (ctx: Context, next:Next):Promise<void> => {
   const {id} = ctx.params
   const user = await getByIdService(id)
-  if(!user) {
+  if (!user) {
     ctx.body = 'User not found!'
     ctx.status = 404
   }
   else {
-    deleteUserService(id)
+    await deleteUserService(id)
     ctx.body = `user ${id} deleted`
     ctx.status = 204
   }
-  next()
+  await next()
 })

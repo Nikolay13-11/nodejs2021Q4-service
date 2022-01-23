@@ -1,3 +1,4 @@
+import { generateHash } from "../../common/middleware/auth";
 import { IUser, IUserWoId } from "./models/user.model";
 import { User } from "./user.model";
 
@@ -12,7 +13,9 @@ export const getUserById = async (id: string): Promise<User | undefined> => {
 }
 
 export const createNewUser = async (obj: User): Promise<IUser> => {
-  // const newUser = new User(obj)
+  const password = await generateHash(obj.password)
+  // eslint-disable-next-line no-param-reassign
+  obj.password = password
   const newUser = await User.getRepository().create({...obj})
   await User.getRepository().save(newUser)
   return newUser
