@@ -10,14 +10,33 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
+const users_module_1 = require("./users/users.module");
+const task_module_1 = require("./tssks/task.module");
+const board_module_1 = require("./boards/board.module");
+const typeorm_1 = require("@nestjs/typeorm");
+const config_1 = require("@nestjs/config");
+const login_module_1 = require("./login/login.module");
+const ormconfig_1 = require("./ormconfig");
+const logs_middleware_1 = require("./middleware/logs.middleware");
+console.log(process.env.PORT);
 let AppModule = class AppModule {
+    configure(consumer) {
+        consumer.apply(logs_middleware_1.default).forRoutes('*');
+    }
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [],
+        imports: [
+            config_1.ConfigModule.forRoot(),
+            typeorm_1.TypeOrmModule.forRoot(ormconfig_1.default),
+            users_module_1.UsersModule,
+            task_module_1.TaskModule,
+            board_module_1.BoardModule,
+            config_1.ConfigModule.forRoot(),
+            login_module_1.LoginModule,
+        ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })
 ], AppModule);
 exports.AppModule = AppModule;
-//# sourceMappingURL=app.module.js.map
