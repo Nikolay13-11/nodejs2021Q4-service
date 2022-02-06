@@ -20,7 +20,14 @@ npm install
 ## Running application
 
 ```
-npm start
+# development
+$ npm run start
+
+# watch mode
+$ npm run start:dev
+
+# production mode
+$ npm run start:prod
 ```
 
 After starting the app on port (4000 as default) you can open
