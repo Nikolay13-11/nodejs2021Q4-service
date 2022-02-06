@@ -18,7 +18,7 @@ services:
       - service-vol:/app/logs
       - ./:/app
     depends_on:
-      - node-base
+      - postgres
     networks:
       - network
   postgres:
